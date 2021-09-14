@@ -4,7 +4,11 @@ Create pkZip files with javaScript
 Files can be inserted into your zip file by reading a directory, entering a string or uploading files.
 
 
-First, create a new class Zip
+First, download and include the zip.js class in your html and create a new class Zip
+
+```
+  <script src='zip.js'></script>
+```
 
 ```javascript	
   z=new Zip('myZipFileName');
