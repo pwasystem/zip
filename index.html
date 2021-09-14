@@ -1,0 +1,59 @@
+<html>
+	<head>
+		<title>ZIP</title>		
+		<script src='zip.js'></script>
+	</head>
+	<body>
+		<h1>Zip</h1>
+		<p>
+			The zip class creates PKZip type files using the client browser javaScript.
+			<br>
+			Files can be inserted into your zip file by reading a directory, entering a string or uploading files.
+		</p>
+		
+		<p>first, create a new class Zip</p>
+		<code>	
+			z=new Zip('myZipFileName');
+		</code>
+		<p>Then you can:<p>
+		
+		<p>
+			- Load files of your directory to zip object.
+			<br>		
+			fecth2zip(filesArray,folder);		
+		</p>
+		<code>
+			filesArray=[
+				'file01.ext',
+				'file02.ext',
+				'file...'
+			];
+			z.fecth2zip(filesArray,'public/');
+		</code>
+		
+		<p>
+			- Create a new file from a string.
+			<br>		
+			str2zip(nameFile,content,directory);
+		</p>
+		<code>
+			z.str2zip('test.txt','content','public/teste/');
+		</code>
+		
+		<p>
+			- Or upload to zip.
+			<br>		
+			Put onchange event into the input file and send the files to function files2zip(this.files).
+		</p>
+		<code>
+			&lt;input type="file" onchange="z.files2zip(this.files)" value='files' multiple&gt;
+		</code>
+		
+		<p>After placing all the objects inside your Zip file, just download it.</p>
+		
+		<code>
+			&lt;input type="button" onclick="z.makeZip()" value='Zip'&gt;
+		</code>
+	
+	</body>
+</html>
