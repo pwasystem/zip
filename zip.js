@@ -46,7 +46,7 @@ Zip {
 		});
 	}
 	
-	str2zip(name,str,folder){
+	str2zip(name,str,folder=''){
 		let uint=[...new Uint8Array(this.str2dec(str))];
 		uint.name=name;
 		uint.modTime=new Date();
@@ -54,7 +54,7 @@ Zip {
 		this.zip[uint.fileUrl]=uint;
 	}
 	
-	files2zip(files,folder){
+	files2zip(files,folder=''){
 		for(let i=0;i<files.length;i++){
 			files[i].arrayBuffer().then(data=>{
 				let uint=[...new Uint8Array(data)];
