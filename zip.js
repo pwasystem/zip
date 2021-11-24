@@ -1,4 +1,4 @@
-Zip {
+class Zip {
 
 	constructor(name) {
 		this.name = name;
