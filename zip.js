@@ -74,6 +74,9 @@ class Zip {
 		let offSetLocalHeader='00 00 00 00';
 		let zip=this.zip;
 		for(const name in zip){
+
+
+if ((typeof zip[name]) == 'object') {
 			let modTime=()=>{
 				lastMod=new Date(zip[name].modTime);
 				hour=this.dec2bin(lastMod.getHours(),5);
@@ -107,4 +110,5 @@ class Zip {
 		a.download = `${this.name}.zip`;
 		a.click();				
 	}
+}
 }
