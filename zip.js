@@ -51,7 +51,7 @@ class Zip {
 		uint.name=name;
 		uint.modTime=new Date();
 		uint.fileUrl=`${this.name}/${folder}${name}`;
-		this.zip[uint.fileUrl]=uint;
+		this.zip[name]=uint;
 	}
 	
 	files2zip(files,folder=''){
