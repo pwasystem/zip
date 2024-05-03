@@ -74,6 +74,7 @@ class Zip {
 		let offSetLocalHeader='00 00 00 00';
 		let zip=this.zip;
 		for(const name in zip){
+			let lastMod, hour, minutes, seconds, year, month, day;
 			let modTime=()=>{
 				lastMod=new Date(zip[name].modTime);
 				hour=this.dec2bin(lastMod.getHours(),5);
