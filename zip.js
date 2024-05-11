@@ -74,6 +74,7 @@ class Zip {
 		let offSetLocalHeader='00 00 00 00';
 		let zip=this.zip;
 		for(const name in zip){
+			let lastMod, hour, minutes, seconds, year, month, day;
 			let modTime=()=>{
 				lastMod=new Date(zip[name].modTime);
 				hour=this.dec2bin(lastMod.getHours(),5);
@@ -88,10 +89,10 @@ class Zip {
 			let size=this.reverse(parseInt(zip[name].length).toString(16).padStart(8,'0'));
 			let nameFile=this.str2hex(zip[name].fileUrl).join(' ');
 			let nameSize=this.reverse(zip[name].fileUrl.length.toString(16).padStart(4,'0'));
-			let fileHeader=`50 4B 03 04 14 00 00 00 00 00 ${modTime} ${crc} ${size} ${size} ${nameSize} 00 00 ${nameFile}`;
+			let fileHeader=`50 4B 03 04 14 00 00 00 00 00 ${modTime()} ${crc} ${size} ${size} ${nameSize} 00 00 ${nameFile}`;
 			let fileHeaderBuffer=this.hex2buf(fileHeader);
 			directoryInit=directoryInit+fileHeaderBuffer.length+zip[name].length;
-			centralDirectoryFileHeader=`${centralDirectoryFileHeader}50 4B 01 02 14 00 14 00 00 00 00 00 ${modTime} ${crc} ${size} ${size} ${nameSize} 00 00 00 00 00 00 01 00 20 00 00 00 ${offSetLocalHeader} ${nameFile} `;
+			centralDirectoryFileHeader=`${centralDirectoryFileHeader}50 4B 01 02 14 00 14 00 00 00 00 00 ${modTime()} ${crc} ${size} ${size} ${nameSize} 00 00 00 00 00 00 01 00 20 00 00 00 ${offSetLocalHeader} ${nameFile} `;
 			offSetLocalHeader=this.reverse(directoryInit.toString(16).padStart(8,'0'));
 			this.file.push(fileHeaderBuffer,new Uint8Array(zip[name]));
 			count++;
