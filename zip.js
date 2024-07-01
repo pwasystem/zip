@@ -88,7 +88,8 @@ class Zip {
 			let crc=this.crc32(zip[name]);
 			let size=this.reverse(parseInt(zip[name].length).toString(16).padStart(8,'0'));
 			let nameFile=this.str2hex(zip[name].fileUrl).join(' ');
-			let nameSize=this.reverse(zip[name].fileUrl.length.toString(16).padStart(4,'0'));
+            		let nameBytes = new TextEncoder().encode(zip[name].fileUrl);
+           		let nameSize = this.reverse(nameBytes.length.toString(16).padStart(4, '0'));
 			let fileHeader=`50 4B 03 04 14 00 00 00 00 00 ${modTime()} ${crc} ${size} ${size} ${nameSize} 00 00 ${nameFile}`;
 			let fileHeaderBuffer=this.hex2buf(fileHeader);
 			directoryInit=directoryInit+fileHeaderBuffer.length+zip[name].length;
