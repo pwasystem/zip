@@ -59,7 +59,7 @@ class Zip {
 			files[i].arrayBuffer().then(data=>{
 				let uint=[...new Uint8Array(data)];
 				uint.name=files[i].name;
-				uint.modTime=files[i].lastModifiedDate;
+				uint.modTime=files[i].lastModified;
 				uint.fileUrl=`${this.name}/${folder}${files[i].name}`;
 				this.zip[uint.fileUrl]=uint;							
 			});
