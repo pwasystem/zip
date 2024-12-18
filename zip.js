@@ -4,6 +4,7 @@ class Zip {
 		this.name = name;
 		this.zip = new Array();
 		this.file = new Array();
+		this.o = this.makeo();
 	}
 	
 	dec2bin=(dec,size)=>dec.toString(2).padStart(size,'0');
@@ -18,13 +19,17 @@ class Zip {
 		return hexArray.filter((a)=>a).reverse().join(' ');	
 	}
 	
-	crc32=r=>{
+	makeo=()=>{	
 		for(var a,o=[],c=0;c<256;c++){
 			a=c;
 			for(var f=0;f<8;f++)a=1&a?3988292384^a>>>1:a>>>1;
 			o[c]=a;
 		}
-		for(var n=-1,t=0;t<r.length;t++)n=n>>>8^o[255&(n^r[t])];
+		return o;
+	}
+	
+	crc32=r=>{
+		for(var n=-1,t=0;t<r.length;t++)n=n>>>8^this.o[255&(n^r[t])];
 		return this.reverse(((-1^n)>>>0).toString(16).padStart(8,'0'));
 	}
 	
